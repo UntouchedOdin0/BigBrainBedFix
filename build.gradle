@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'bed.fix'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = '1.8' // Put the minimum version of Java you want your plugin to run on
+targetCompatibility = '1.8' // Put the minimum version of Java you want your plugin to run on
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://oss.sonatype.org/content/groups/public/' }
+    maven { url = 'https://jitpack.io' }
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+
+        // As of Gradle 5.1, you can limit this to only those
+        // dependencies you expect from it
+        content {
+            includeGroup 'org.bukkit'
+            includeGroup 'org.spigotmc'
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
+
+}
+
+test {
+    useJUnitPlatform()
+}
